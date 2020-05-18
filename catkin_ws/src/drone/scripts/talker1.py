@@ -88,7 +88,10 @@ def talker():
         time = rospy.get_time()
         hello_str = str(encrypt(Padding.appendPadding(a,mode='CMS'), key, AES.MODE_CBC, salt)) + "|" + str(time)
         rospy.loginfo(hello_str)
-        pub.publish(hello_str)
+        with open("test.png", "rb")as img_file:
+            mystring = base64.b64encode(img_file.read())
+        rospy.loginfo(mystring)
+        pub.publish(mystring)
 
 
 if __name__ == '__main__':

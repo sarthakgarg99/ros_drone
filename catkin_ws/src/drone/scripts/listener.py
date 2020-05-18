@@ -33,37 +33,38 @@
 #
 # Revision $Id$
 
-## Simple talker demo that published std_msgs/Strings messages
+## Simple talker demo that listens to std_msgs/Strings published 
 ## to the 'chatter' topic
 
 import rospy
 from std_msgs.msg import String
+from sensor_msgs.msg import CompressedImage
 
-import sys
-size = 64000
+num = 0
+sum = 0
+def callback(data):
+    a = data.data;
+    # time.sleep(1);
+    np_arr = np.fromstring(ros_data.data, np.uint8)
+    rospy.loginfo(np_arr)
+
+    # rospy.loginfo(int(time_rec * 10000))
+    # rospy.loginfo(int(time_pub*10000))
 
 
-def talker():
-    pub = rospy.Publisher('chatter', String, queue_size=10)
-    rospy.init_node('talker', anonymous=True)
-    rate = rospy.Rate(50) # 10hz
-    a = ""
-    for i in range(0,size):
-        a = a + "a"
-    rospy.loginfo(sys.getsizeof(a))
-    while not rospy.is_shutdown():
-        
-        a = ""
-        for i in range(0,size):
-            a = a + "a"
-        time = rospy.get_time()
-        hello_str = a + "|"+str(int(time*10000))
-        # rospy.loginfo(hello_str)
-        pub.publish(hello_str)
-        rate.sleep()
+def listener():
+
+    # In ROS, nodes are uniquely named. If two nodes with the same
+    # name are launched, the previous one is kicked off. The
+    # anonymous=True flag means that rospy will choose a unique
+    # name for our 'listener' node so that multiple listeners can
+    # run simultaneously.
+    rospy.init_node('listener', anonymous=True)
+
+    rospy.Subscriber('chatter', String, callback)
+
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
 
 if __name__ == '__main__':
-    try:
-        talker()
-    except rospy.ROSInterruptException:
-        pass
+    listener()
