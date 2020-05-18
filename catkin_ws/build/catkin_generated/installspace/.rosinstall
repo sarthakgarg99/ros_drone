@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/baadalvm/ros_drone/catkin_ws/install/setup.sh
