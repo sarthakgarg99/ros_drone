@@ -39,7 +39,7 @@
 import rospy
 from std_msgs.msg import String
 from sensor_msgs.msg import CompressedImage
-
+import numpy as np
 num = 0
 sum = 0
 def callback(data):
