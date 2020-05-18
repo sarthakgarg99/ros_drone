@@ -45,7 +45,7 @@ sum = 0
 def callback(data):
     a = data.data;
     # time.sleep(1);
-    np_arr = np.fromstring(ros_data.data, np.uint8)
+    np_arr = np.fromstring(data.data, np.uint8)
     rospy.loginfo(np_arr)
 
     # rospy.loginfo(int(time_rec * 10000))

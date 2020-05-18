@@ -57,7 +57,7 @@ def talker():
         msg = CompressedImage()
         msg.header.stamp = rospy.Time.now()
         msg.format = "jpeg"
-        msg.data = np.zeros((10,10))
+        msg.data = np.zeros((10,10)).tostring()
         pub.publish(msg)
         rate.sleep()
 
