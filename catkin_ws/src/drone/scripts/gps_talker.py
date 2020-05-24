@@ -12,6 +12,7 @@ def talker():
         msg.latitude = 2.34
         msg.longitude = 5.43
         msg.altitude = 5.43
+        rospy.log(msg.tostring())
         pub.publish(msg)
 
 if __name__ == '__main__':
