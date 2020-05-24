@@ -37,14 +37,16 @@
 ## to the 'chatter' topic
 
 import rospy
-from std_msgs.msg import String
-
+from sensor_msgs.msg import CompressedImage
+import numpy as np
 import sys
 size = 64000
 
 
+
+
 def talker():
-    pub = rospy.Publisher('chatter', String, queue_size=10)
+    pub = rospy.Publisher('chatter', CompressedImage, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(50) # 10hz
     a = ""
@@ -52,14 +54,11 @@ def talker():
         a = a + "a"
     rospy.loginfo(sys.getsizeof(a))
     while not rospy.is_shutdown():
-        
-        a = ""
-        for i in range(0,size):
-            a = a + "a"
-        time = rospy.get_time()
-        hello_str = a + "|"+str(int(time*10000))
-        # rospy.loginfo(hello_str)
-        pub.publish(hello_str)
+        msg = CompressedImage()
+        msg.header.stamp = rospy.Time.now()
+        msg.format = "jpeg"
+        msg.data = np.zeros((10,10)).tostring()
+        pub.publish(msg)
         rate.sleep()
 
 if __name__ == '__main__':

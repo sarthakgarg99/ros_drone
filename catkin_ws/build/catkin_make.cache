@@ -1,0 +1,2 @@
+drone
+-DCATKIN_DEVEL_PREFIX=/home/baadalvm/ros_drone/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/baadalvm/ros_drone/catkin_ws/install -G Unix Makefiles

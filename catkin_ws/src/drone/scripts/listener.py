@@ -38,25 +38,15 @@
 
 import rospy
 from std_msgs.msg import String
-
-
+from sensor_msgs.msg import CompressedImage
+import numpy as np
 num = 0
 sum = 0
 def callback(data):
     a = data.data;
     # time.sleep(1);
-    time_rec = rospy.get_time();
-    time_pub = int(a.split('|')[-1]);
-    # rospy.loginfo(int(time_rec * 10000) - time_pub);
-    global num
-    global sum
-    if(int(time_rec * 10000) - time_pub > 0):
-        num += 1
-        sum += int(time_rec * 10000) - time_pub
-        if(num == 1000):
-            rospy.loginfo(sum/num)
-    else:
-        rospy.loginfo("hi")
+    np_arr = np.fromstring(data.data, np.uint8)
+    rospy.loginfo(np_arr)
 
     # rospy.loginfo(int(time_rec * 10000))
     # rospy.loginfo(int(time_pub*10000))
@@ -71,7 +61,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
 
-    rospy.Subscriber('chatter', String, callback)
+    rospy.Subscriber('chatter', CompressedImage, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
