@@ -10,6 +10,10 @@ def callback(data):
     # time.sleep(1);
     np_arr = np.fromstring(data.data, np.uint8)
     rospy.loginfo(np_arr)
+    t1 = rospy.Time.now()
+    t2 = data.header.stamp
+
+    rospy.loginfo(t1 - t2)
 
     # rospy.loginfo(int(time_rec * 10000))
     # rospy.loginfo(int(time_pub*10000))
@@ -24,7 +28,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
 
-    rospy.Subscriber('chatter', CompressedImage, callback)
+    rospy.Subscriber('cam_data', CompressedImage, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
