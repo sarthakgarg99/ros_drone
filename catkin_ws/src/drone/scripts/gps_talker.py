@@ -2,7 +2,6 @@ import rospy
 from sensor_msgs.msg import NavSatFix
 import numpy as np
 import sys
-size = 64000
 
 def talker():
     pub = rospy.Publisher('chatter_gps', NavSatFix, queue_size=10)
