@@ -19,7 +19,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
 
-    rospy.Subscriber('chatter', CompressedImage, callback)
+    rospy.Subscriber('chatter_gps', NavSatFix, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
