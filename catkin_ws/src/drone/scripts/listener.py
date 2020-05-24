@@ -13,7 +13,7 @@ def callback(data):
     t1 = rospy.Time.now()
     t2 = data.header.stamp
 
-    rospy.loginfo(t1 - t2)
+    rospy.loginfo(str(t1) + " " + str(t2) + " " str(t1 - t2))
 
     # rospy.loginfo(int(time_rec * 10000))
     # rospy.loginfo(int(time_pub*10000))
