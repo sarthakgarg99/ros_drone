@@ -2,10 +2,8 @@ import rospy
 from sensor_msgs.msg import NavSatFix
 import numpy as np
 
-
 def callback(data):
-    a = data.data
-
+    a = data
     lat = a.latitude
     lon = a.longitude
     alt = a.altitude
@@ -21,7 +19,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('listener', anonymous=True)
 
-    rospy.Subscriber('chatter', CompressedImage, callback)
+    rospy.Subscriber('chatter_gps', NavSatFix, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
