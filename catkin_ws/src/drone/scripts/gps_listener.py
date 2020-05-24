@@ -1,18 +1,16 @@
 import rospy
-from std_msgs.msg import String
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import NavSatFix
 import numpy as np
-num = 0
-sum = 0
+
+
 def callback(data):
-    a = data.data;
-    # time.sleep(1);
-    np_arr = np.fromstring(data.data, np.uint8)
-    rospy.loginfo(np_arr)
+    a = data.data
 
-    # rospy.loginfo(int(time_rec * 10000))
-    # rospy.loginfo(int(time_pub*10000))
-
+    lat = a.latitude
+    lon = a.longitude
+    alt = a.altitude
+    rospy.loginfo(a)
+    rospy.loginfo(str(lat) + " " + str(lon) + " " + str(alt))
 
 def listener():
 
